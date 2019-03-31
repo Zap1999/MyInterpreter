@@ -20,7 +20,7 @@ public class OpPrint extends Operator {
         inte.next();
 
         String trim = code.trim();
-        if(trim.startsWith("\"")){
+        /*if(trim.startsWith("\"")){
             String quotedStr = trim.substring(1, trim.length() -2);
             if(trim.endsWith(";")) {
                 System.out.print(quotedStr);
@@ -28,7 +28,7 @@ public class OpPrint extends Operator {
                 System.out.println(quotedStr);
             }
             return;
-        }
+        }*/
 
         try {
             res = Expression.eval(inte.getVars(), code);

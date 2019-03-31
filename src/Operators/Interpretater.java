@@ -1,5 +1,7 @@
 package Operators;
 
+import VarTypes.VarType;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -8,8 +10,8 @@ public class Interpretater {
 
     private TreeMap<Integer, Operator> code =
             new TreeMap<Integer, Operator>();
-    private Map<String, Double> vars =
-            new HashMap<String, Double>();
+    private Map<String, VarType> vars =
+            new HashMap<String, VarType>();
     private Integer curLine;
 
     public void next() {
@@ -59,9 +61,10 @@ public class Interpretater {
 
     }
 
-    public Map<String, Double> getVars() {
+    public Map<String, VarType> getVars() {
         return vars;
     }
 
+    public void put(String var, VarType val) {vars.put(var, val);}
 
 }
