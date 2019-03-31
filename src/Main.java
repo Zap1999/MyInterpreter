@@ -8,8 +8,8 @@ public class Main {
     public static void main(String[] args) {
 
         // file
-        if (/*args[0] == "-f"*/false) {
-            String fileName = "D:\\PE\\Java\\parser2\\src\\hell.machine";
+        if (/*args[0] == "-f"*/true) {
+            String fileName = "D:\\PE\\Java\\parser2\\src\\light.machine";
 
             try {
                 BufferedReader fileReader =
@@ -30,7 +30,7 @@ public class Main {
         }
 
         // commands
-        else if(/*args[0] == "-c"*/true) {
+        else if(/*args[0] == "-c"*/false) {
 
             Scanner s = new Scanner(System.in);
             Interpretater interpretater = new Interpretater();

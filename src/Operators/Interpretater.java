@@ -8,8 +8,8 @@ public class Interpretater {
 
     private TreeMap<Integer, Operator> code =
             new TreeMap<Integer, Operator>();
-    private Map<String, Double> vars =
-            new HashMap<String, Double>();
+    private Map<String, Object> vars =
+            new HashMap<String, Object>();
     private Integer curLine;
 
     public void next() {
@@ -59,9 +59,12 @@ public class Interpretater {
 
     }
 
-    public Map<String, Double> getVars() {
+    public Map<String, Object> getVars() {
         return vars;
     }
 
+    public void put(String var, Object val) {
+        vars.put(var, val);
+    }
 
 }
