@@ -17,10 +17,14 @@ public class OpVar extends Operator {
         String[] parts = code.split("=");
         if (parts[1].trim().matches("\".*\"") ) {
             try{
-                String val =parts[1].trim();
-                Matcher m = Pattern.compile("([\"]\\S*|\".+?\")").matcher(val);
-                val = m.group(1).replace("\"", "");
-                inte.put(parts[0].trim(), val);
+                String val =parts[1];
+                Matcher m = Pattern.compile("(.*?)"/*"([\\\"'])(?:(?=(\\\\?))\\2.)*?\\1"*/).matcher(val);
+                if (m.find()) {
+                    val = m.group(1).replace("\"", "");
+                    inte.put(parts[0].trim(), val);
+                }else {
+                    System.err.println("String syntax error");
+                }
             }catch (Exception e) {
                 e.printStackTrace();
             }
