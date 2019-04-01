@@ -1,7 +1,9 @@
 import Operators.Interpretater;
+import VarTypes.StringVar;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -23,7 +25,16 @@ public class Main {
                     if (!line.contains("{")) {
                         interpretater.parse(line);
                     }else {
-                        String
+                        ArrayList<String> lines = new ArrayList<>();
+                        do{
+                            if(line == null) {
+                                System.err.println("Error: missing '}'.");
+                                break;
+                            }
+                            lines.add(line);
+                            line = fileReader.readLine();
+                        }while(!line.contains("}"));
+                        interpretater.parse(lines);
                     }
                 }
                 interpretater.run();

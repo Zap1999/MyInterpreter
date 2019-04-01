@@ -30,7 +30,6 @@ public class OpVar extends Operator {
             }
         }
 
-        inte.next();
 
     }
 

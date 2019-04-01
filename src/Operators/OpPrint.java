@@ -17,7 +17,6 @@ public class OpPrint extends Operator {
 
         Object res = null;
 
-        inte.next();
 
         String trim = code.trim();
         if(trim.startsWith("\"")){

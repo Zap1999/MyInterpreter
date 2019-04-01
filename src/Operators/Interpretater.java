@@ -2,6 +2,7 @@ package Operators;
 
 import VarTypes.VarType;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -27,12 +28,30 @@ public class Interpretater {
         while (true) {
             Operator operator = code.get(curLine);
             operator.exec(this);
+            this.next();
             if (curLine == null) break;
         }
     }
 
-    public void parse(String[] lines) {
-
+    public void parse(ArrayList<String> lines) {
+        try {
+            String line = lines.get(0);
+            lines.remove(0);
+            String parts[] = line.split(" ");
+            int lineNumber = Integer.parseInt(parts[0]);
+            String opName = parts[1];
+            Operator operator;
+            if(opName == "while") {
+                operator = new OpWhile(lines);
+            }
+            else {
+                // !!!!!!!!!
+                operator = new OpWhile(lines);
+            }
+            code.put(lineNumber, operator);
+        } catch (RuntimeException e) {
+            System.err.println("Wrong operation");
+        }
     }
 
     public void parse(String line) {

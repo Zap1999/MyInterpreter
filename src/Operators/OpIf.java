@@ -16,7 +16,6 @@ public class OpIf extends Operator {
         Pattern pattern = Pattern.compile("(.*) then goto (.*)");
         Matcher matcher = pattern.matcher(code);
 
-        inte.next();
 
         if(!matcher.find()) {
             System.err.println("Bad operation if");
