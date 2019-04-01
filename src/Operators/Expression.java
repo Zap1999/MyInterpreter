@@ -15,7 +15,7 @@ public class Expression {
         for (String var : vars.keySet()) {
                 code = code.replace(var, vars.get(var).toString());
         }
-
+        code = code.trim();
         if(code.matches("\".+?\"" )) {
             code = code.substring(1, code.length()-1);
             return code;
@@ -24,9 +24,10 @@ public class Expression {
             ScriptEngine engine = mgr.getEngineByName("JavaScript");
 
             for (String var : vars.keySet()) {
-                if (vars.get(var).getType()=="Digit")
+                if (vars.get(var).getType()=="Digit") {
                     code = code.replace("--", "+");
-                    code = code.replace("-"+var, DigitVar.invertSign(Double.parseDouble(vars.get(var).toString())));
+                    code = code.replace("-" + var, DigitVar.invertSign(Double.parseDouble(vars.get(var).toString())));
+                }
             }
             code = code.replace("sqrt", "Math.sqrt");
             return engine.eval(code);

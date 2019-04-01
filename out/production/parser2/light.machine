@@ -1,7 +1,6 @@
-1 var x=1
-2 while x<=4 do {
-    print x
+1 var x=0
+2 while x<4 do {
     var x=x+1
-    print x+1
-    print "hola"
+    var y="lol"
 }
+3 print y

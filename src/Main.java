@@ -11,7 +11,7 @@ public class Main {
 
         // file
         if (/*args[0] == "-f"*/true) {
-            String fileName = "D:\\PE\\Java\\parser2\\src\\hell.machine";
+            String fileName = "D:\\PE\\Java\\parser2\\src\\light.machine";
 
             try {
                 BufferedReader fileReader =
