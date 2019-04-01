@@ -1,6 +1,6 @@
-10 var a = 1
-20 var b = -2
-30 var c = 1
+10 var a = 3
+20 var b = 33
+30 var c = 7
 40 var d = b*b-4*a*c
 50 if d>0 then goto 100
 60 if d==0 then goto 200
@@ -8,11 +8,11 @@
 80 goto 300
 100 var x1 = (-b + sqrt(d))/2/a
 110 var x2 = (-b - sqrt(d))/2/a
-120 print "x1="
+120 print "x1=";
 130 print x1
-140 print "x2="
+140 print "x2=";
 150 print x2
 160 goto 300
 200 print "x=";
 210 print -b/2/a
-300 print "program finished";
+300 print "PROGRAM FINISHED";

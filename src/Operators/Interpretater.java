@@ -31,6 +31,10 @@ public class Interpretater {
         }
     }
 
+    public void parse(String[] lines) {
+
+    }
+
     public void parse(String line) {
 
         if (line.equalsIgnoreCase("RUN")) {

@@ -20,7 +20,11 @@ public class Main {
                 while (true) {
                     String line = fileReader.readLine();
                     if (line == null) break;
-                    interpretater.parse(line);
+                    if (!line.contains("{")) {
+                        interpretater.parse(line);
+                    }else {
+                        String
+                    }
                 }
                 interpretater.run();
             } catch (Exception e) {
