@@ -15,4 +15,4 @@
 160 goto 300
 200 print "x=";
 210 print -b/2/a
-300 print "PROGRAM FINISHED";
+300 print "PROGRAM FINISHED"

@@ -11,7 +11,7 @@ public class Main {
 
         // file
         if (/*args[0] == "-f"*/true) {
-            String fileName = "D:\\PE\\Java\\parser2\\src\\light.machine";
+            String fileName = "D:\\PE\\Java\\parser2\\src\\hell.machine";
 
             try {
                 BufferedReader fileReader =
@@ -34,6 +34,7 @@ public class Main {
                             lines.add(line);
                             line = fileReader.readLine();
                         }while(!line.contains("}"));
+                        lines.add(line);
                         interpretater.parse(lines);
                     }
                 }

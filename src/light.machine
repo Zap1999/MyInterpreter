@@ -1,3 +1,7 @@
 1 var x=1
-2 while x<4 do print x
-3 print x
+2 while x<=4 do {
+    print x
+    var x=x+1
+    print x+1
+    print "hola"
+}

@@ -28,7 +28,8 @@ public class Interpretater {
         while (true) {
             Operator operator = code.get(curLine);
             operator.exec(this);
-            this.next();
+            if(!(operator instanceof OpIf || operator instanceof OpGoTo))
+                this.next();
             if (curLine == null) break;
         }
     }
@@ -36,7 +37,6 @@ public class Interpretater {
     public void parse(ArrayList<String> lines) {
         try {
             String line = lines.get(0);
-            lines.remove(0);
             String parts[] = line.split(" ");
             int lineNumber = Integer.parseInt(parts[0]);
             String opName = parts[1];

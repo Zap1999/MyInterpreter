@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
 
 public class OpWhile extends Operator {
 
-    private ArrayList<String> lines;
 
     public OpWhile(String code) {
         super(code);
@@ -49,8 +48,42 @@ public class OpWhile extends Operator {
 
             }
         }
+        //      while i<4 do {
+        //          print x
+        //          var x=x+1
+        //      }
         else {
 
+            Pattern pattern = Pattern.compile("(.*) do (.*)");
+            Matcher matcher = pattern.matcher(extendedCode.get(0));
+
+            if (!matcher.find()) {
+                System.err.println("Error: Wrong while syntax.");
+            } else {
+                String cond = matcher.group(1);
+                String makingCond[] = cond.split(" ");
+                cond = makingCond[2];
+                extendedCode.remove(0);
+                extendedCode.remove(extendedCode.size()-1);
+
+                try {
+                    while(true) {
+                        Object res = Expression.eval(inte.getVars(), cond);
+                        if (res instanceof Boolean && res.equals(true)) {
+                            for(int i = 0; i < extendedCode.size(); ++i) {
+                                String current = extendedCode.get(i).trim();
+                                String parts[] = current.split(" ");
+                                Operator op = OpFactory.createOperator(parts[0], current.substring(parts[0].length()));
+                                op.exec(inte);
+                            }
+                        }
+                        else break;
+                    }
+                } catch (ScriptException e) {
+                    e.printStackTrace();
+                }
+
+            }
         }
 
     }

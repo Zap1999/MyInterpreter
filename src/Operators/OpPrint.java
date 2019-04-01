@@ -20,10 +20,11 @@ public class OpPrint extends Operator {
 
         String trim = code.trim();
         if(trim.startsWith("\"")){
-            String quotedStr = trim.substring(1, trim.length() -2);
             if(trim.endsWith(";")) {
+                String quotedStr = trim.substring(1, trim.length() -2);
                 System.out.print(quotedStr);
             }else {
+                String quotedStr = trim.substring(1, trim.length() -1);
                 System.out.println(quotedStr);
             }
             return;

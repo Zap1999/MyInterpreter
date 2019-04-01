@@ -13,7 +13,7 @@ public class Expression {
     public static Object eval(Map<String, VarType> vars, String code)
             throws ScriptException {
         for (String var : vars.keySet()) {
-                code = code.replaceFirst(var, vars.get(var).toString());
+                code = code.replace(var, vars.get(var).toString());
         }
 
         if(code.matches("\".+?\"" )) {
