@@ -22,20 +22,38 @@ public class Main {
                 while (true) {
                     String line = fileReader.readLine();
                     if (line == null) break;
-                    if (!line.contains("{")) {
+                    if (!line.contains("{") && !line.contains("[")) {
                         interpretater.parse(line);
-                    }else {
+                    }else if (line.contains("{")){
                         ArrayList<String> lines = new ArrayList<>();
-                        do{
-                            if(line == null) {
-                                System.err.println("Error: missing '}'.");
-                                break;
-                            }
+                        try {
+                            do {
+                                if (line == null) {
+                                    break;
+                                }
+                                lines.add(line);
+                                line = fileReader.readLine();
+                            } while (!line.contains("}"));
                             lines.add(line);
-                            line = fileReader.readLine();
-                        }while(!line.contains("}"));
-                        lines.add(line);
-                        interpretater.parse(lines);
+                            interpretater.parse(lines);
+                        }catch (NullPointerException e) {
+                            System.err.println("Error: missing '}'.");
+                        }
+                    }else if(line.contains("[")) {
+                        ArrayList<String> lines = new ArrayList<>();
+                        try {
+                            do {
+                                if (line == null) {
+                                    break;
+                                }
+                                lines.add(line);
+                                line = fileReader.readLine();
+                            } while (!line.contains("]"));
+                            lines.add(line);
+                            interpretater.parse(lines);
+                        }catch (NullPointerException e) {
+                            System.err.println("Error: missing ']'.");
+                        }
                     }
                 }
                 interpretater.run();

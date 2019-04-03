@@ -1,6 +1,13 @@
-1 var x=0
-2 while x<4 do {
-    var x=x+1
-    var y="lol"
-}
-3 print y
+1 createObject Andrew [
+    field age = 19
+    field height = 190
+
+    sayHello <<
+       print "Hello, I'm Andrew."
+    >>
+
+    sayGoodbye <<
+        print "Goodbye, I was Andrew."
+    >>
+
+]
