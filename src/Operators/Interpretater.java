@@ -1,6 +1,8 @@
 package Operators;
 
 import VarTypes.VarType;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.*;
 
@@ -13,6 +15,13 @@ public class Interpretater {
     private Integer curLine;
     private HashMap<String, ObjectContainer> objects =
             new HashMap<>();
+
+    private WebDriver driver;
+
+    public Interpretater() {
+        System.setProperty("webdriver.chrome.driver", "D:\\PE\\Java\\parser2\\chromedriver.exe");
+        driver = new ChromeDriver();
+    }
 
     public void next() {
         curLine = code.higherKey(curLine);
@@ -107,6 +116,10 @@ public class Interpretater {
                 this.vars.put((String) pair.getKey(),(VarType) pair.getValue());
             }
         }
+    }
+
+    public WebDriver getDriver() {
+        return driver;
     }
 
 }

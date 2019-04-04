@@ -1,5 +1,13 @@
 import Operators.Interpretater;
 import VarTypes.StringVar;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javafx.stage.Stage;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -7,11 +15,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
+
+
     public static void main(String[] args) {
+
 
         // file
         if (/*args[0] == "-f"*/true) {
-            String fileName = "D:\\PE\\Java\\parser2\\src\\light.machine";
+            String fileName = "D:\\PE\\Java\\parser2\\src\\testWeb.machine";
 
             try {
                 BufferedReader fileReader =
@@ -75,4 +86,6 @@ public class Main {
 
         }
     }
+
+
 }

@@ -14,6 +14,9 @@ public class OpFactory {
         ops.put("goto", OpGoTo.class);
         ops.put("while", OpWhile.class);
         ops.put("use", OpUseObject.class);
+        ops.put("loadLink", OpLoadLink.class);
+        ops.put("enterInput", OpEnterInput.class);
+        ops.put("click", OpClick.class);
     }
 
     public static Operator createOperator(String opName, String subString) {
