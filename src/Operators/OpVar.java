@@ -18,8 +18,18 @@ public class OpVar extends Operator {
         String[] parts = code.split("=");
         String name = parts[0].trim();
         String value = parts[1].trim();
-        if (value.matches("\".+?\"") ) {
+        if (value.matches("\".+?\"")) {
             inte.put(name, new StringVar(parts[1].trim()));
+        }
+        else if(value.matches(".*\\..*")) {
+            String valSplit[] = value.split(".");
+            String objName = valSplit[0];
+            String objVar = valSplit[1];
+            String varVal = inte.getObj(objName).getVar(objVar);
+            if(varVal.contains("\"")) {
+                inte.put(name, new StringVar(varVal));
+            }
+            el
         }
         else{
             try {

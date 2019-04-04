@@ -14,8 +14,8 @@ public class Interpretater {
     private Map<String, VarType> vars =
             new HashMap<String, VarType>();
     private Integer curLine;
-    private ArrayList<ObjectContainer> objects =
-            new ArrayList<>();
+    private Map<String, ObjectContainer> objects =
+            new HashMap<>();
 
     public void next() {
         curLine = code.higherKey(curLine);
@@ -91,8 +91,12 @@ public class Interpretater {
 
     public void put(String var, VarType val) {vars.put(var, val);}
 
-    public void addObj(ObjectContainer e) {
-        this.objects.add(e);
+    public void addObj(String name, ObjectContainer obj) {
+        objects.put(name, obj);
+    }
+
+    public ObjectContainer getObj(String name) {
+        return objects.get(name);
     }
 
 }

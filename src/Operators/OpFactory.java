@@ -13,6 +13,7 @@ public class OpFactory {
         ops.put("if", OpIf.class);
         ops.put("goto", OpGoTo.class);
         ops.put("while", OpWhile.class);
+        ops.put("use", OpUseObject.class);
     }
 
     public static Operator createOperator(String opName, String subString) {

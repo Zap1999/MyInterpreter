@@ -1,5 +1,8 @@
 package Operators;
 
+import VarTypes.DigitVar;
+import VarTypes.StringVar;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -12,10 +15,10 @@ public class ObjectContainer {
     private Map<String, String> digVars = new HashMap<>();
     private ArrayList<ArrayList<String>> methods  = new ArrayList<ArrayList<String>>();
 
-    public ObjectContainer(String name, ArrayList<String> vars, ArrayList<String> methods) {
+    public ObjectContainer(Interpretater inte, String name, ArrayList<String> vars, ArrayList<String> methods) {
         this.name = name;
         try {
-            putVars(vars);
+            putVars(inte, vars);
             putMethods(methods);
         }catch (Exception e) {
             System.err.println("Incorrect object syntax.");
@@ -23,7 +26,7 @@ public class ObjectContainer {
         }
     }
 
-    private void putVars(ArrayList<String> varArray) throws Exception {
+    private void putVars(Interpretater inte, ArrayList<String> varArray) {
 
         HashMap<String, String> strVars = new HashMap<>();
         HashMap<String, String> digVars = new HashMap<>();
@@ -32,11 +35,14 @@ public class ObjectContainer {
 
             curStr = curStr.trim();
             String tokens[] = curStr.split(" ");
-            if(tokens[2].trim().matches("\"(.*)\""))
-                strVars.put(tokens[1], tokens[2]);
-            else
+            if(tokens[2].trim().matches("\"(.*)\"")) {
+                strVars.put(tokens[1], tokens[3]);
+                inte.getVars().put(name + "." + tokens[1], new StringVar(tokens[3]));
+            }
+            else {
                 digVars.put(tokens[1], tokens[3]);
-
+                inte.getVars().put(name + "." + tokens[1], new DigitVar(tokens[3]));
+            }
 
         }
 
@@ -85,6 +91,23 @@ public class ObjectContainer {
                 if (methodHead.contains(methodName))
                     return true;
         return false;
+    }
+
+    public String getVar(String name) {
+
+        if(strVars.get(name) != null)
+            return strVars.get(name);
+        else
+            return digVars.get(name);
+    }
+
+    public ArrayList<String> getMethod(String name) {
+
+        for(ArrayList<String> array: this.methods)
+            for (String methodHead: array)
+                if (methodHead.contains(name))
+                    return array;
+        return new ArrayList<>();
     }
 
 }

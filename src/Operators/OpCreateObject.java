@@ -54,7 +54,7 @@ public class OpCreateObject extends Operator{
                         break;
                     }
                 }
-                inte.addObj(new ObjectContainer(objName, vars, methods));
+                inte.addObj(objName, new ObjectContainer(inte, objName, vars, methods));
             } catch (Exception e) {
                 e.printStackTrace();
             }
