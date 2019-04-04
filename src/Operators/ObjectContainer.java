@@ -2,17 +2,20 @@ package Operators;
 
 import VarTypes.DigitVar;
 import VarTypes.StringVar;
+import VarTypes.VarType;
+import jdk.nashorn.internal.parser.TokenType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import static java.lang.Character.isDigit;
+
 public class ObjectContainer {
 
     private String name;
-    private Map<String, String> strVars = new HashMap<>();
-    private Map<String, String> digVars = new HashMap<>();
+    private Map<String, VarType> vars = new HashMap<>();
     private ArrayList<ArrayList<String>> methods  = new ArrayList<ArrayList<String>>();
 
     public ObjectContainer(Interpretater inte, String name, ArrayList<String> vars, ArrayList<String> methods) {
@@ -28,26 +31,29 @@ public class ObjectContainer {
 
     private void putVars(Interpretater inte, ArrayList<String> varArray) {
 
-        HashMap<String, String> strVars = new HashMap<>();
-        HashMap<String, String> digVars = new HashMap<>();
+        HashMap<String, VarType> vars = new HashMap<>();
 
         for(String curStr:varArray) {
 
             curStr = curStr.trim();
             String tokens[] = curStr.split(" ");
-            if(tokens[2].trim().matches("\"(.*)\"")) {
-                strVars.put(tokens[1], tokens[3]);
-                inte.getVars().put(name + "." + tokens[1], new StringVar(tokens[3]));
+            if(tokens[3].trim().matches("\"(.*)\"")) {
+                vars.put(tokens[1], new StringVar(tokens[3]));
+                inte.put(name + "." + tokens[1], new StringVar(tokens[3]));
+            }
+            else if(!isDigit(tokens[3].trim().charAt(0))) {
+                VarType var = inte.getVars().get(tokens[3].trim());
+                vars.put(tokens[1], var);
+                inte.put(name + "." + tokens[1], var);
             }
             else {
-                digVars.put(tokens[1], tokens[3]);
-                inte.getVars().put(name + "." + tokens[1], new DigitVar(tokens[3]));
+                vars.put(tokens[1], new DigitVar(tokens[3]));
+                inte.put(name + "." + tokens[1], new DigitVar(tokens[3]));
             }
 
         }
 
-        this.digVars = digVars;
-        this.strVars = strVars;
+        this.vars = vars;
 
     }
 
@@ -81,8 +87,7 @@ public class ObjectContainer {
     }
 
     public boolean hasVar(String varName) {
-        return (this.strVars.get(varName) != null ||
-                this.digVars.get(varName) != null);
+        return this.vars.get(varName) != null;
     }
 
     public boolean hasMethod(String methodName) {
@@ -93,12 +98,9 @@ public class ObjectContainer {
         return false;
     }
 
-    public String getVar(String name) {
+    public VarType getVar(String name) {
 
-        if(strVars.get(name) != null)
-            return strVars.get(name);
-        else
-            return digVars.get(name);
+        return vars.get(name);
     }
 
     public ArrayList<String> getMethod(String name) {

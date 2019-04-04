@@ -15,9 +15,6 @@ public class Expression {
         for (String var : vars.keySet()) {
             code = code.replace(var, vars.get(var).toString());
         }
-        for (String var : vars.keySet()) {
-            code = code.replace(var, vars.get(var).toString());
-        }
         code = code.trim();
         if(code.matches("\".+?\"" )) {
             code = code.substring(1, code.length()-1);

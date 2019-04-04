@@ -5,6 +5,7 @@ import VarTypes.StringVar;
 import VarTypes.VarType;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 public class OpUseObject extends Operator {
@@ -21,27 +22,24 @@ public class OpUseObject extends Operator {
         ObjectContainer obj = inte.getObj(objName);
 
         if(obj.hasVar(operation)) {
-            String var = obj.getVar(operation);
-            if(var.contains("\""))
-                inte.getVars().put(code.trim(), new StringVar(var));
-            else
-                inte.getVars().put(code.trim(), new StringVar(var));
+            inte.put(code.trim(), obj.getVar(operation));
         }
         else if(obj.hasMethod(operation)) {
             ArrayList<String> method = obj.getMethod(operation);
-            execMethod(method);
+            execMethod(inte.getVars(), method);
         }
         else {
             System.err.println("No such an object field or method found. (" + operation + ")");
         }
     }
 
-    private void execMethod(ArrayList<String> lines) {
+    private void execMethod(HashMap<String, VarType> vars, ArrayList<String> lines) {
 
         lines.remove(0);
         lines.remove(lines.size()-1);
 
         Interpretater innerInte = new Interpretater();
+        innerInte.setVars(vars);
         Iterator<String> iter = lines.iterator();
 
         while(iter.hasNext()) {
@@ -57,7 +55,7 @@ public class OpUseObject extends Operator {
                         if (line == null) {
                             break;
                         }
-                        lines.add(line);
+                        innerLines.add(line);
                         line = iter.next();
                     } while (!line.contains("}"));
                     innerLines.add(line);

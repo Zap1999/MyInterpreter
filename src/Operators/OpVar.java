@@ -3,6 +3,7 @@ package Operators;
 import Operators.Operator;
 import VarTypes.DigitVar;
 import VarTypes.StringVar;
+import VarTypes.VarType;
 
 import javax.script.ScriptException;
 import java.util.regex.Pattern;
@@ -22,20 +23,30 @@ public class OpVar extends Operator {
             inte.put(name, new StringVar(parts[1].trim()));
         }
         else if(value.matches(".*\\..*")) {
-            String valSplit[] = value.split(".");
+            String valSplit[] = value.split("\\.");
             String objName = valSplit[0];
             String objVar = valSplit[1];
-            String varVal = inte.getObj(objName).getVar(objVar);
-            if(varVal.contains("\"")) {
-                inte.put(name, new StringVar(varVal));
+            VarType var = inte.getObj(objName).getVar(objVar);
+            if(var.getType() == "Digit") {
+                try {
+                    Object val = Expression.eval(inte.getVars(), var.getValue());
+                    inte.put(name, new DigitVar(val.toString()));
+                }catch (ScriptException e) {
+                    System.err.println("Variable evaluation failed. (" + name + ")");
+                    e.printStackTrace();
+                }
+
             }
-            el
+            else {
+                inte.put(name, var);
+            }
         }
         else{
             try {
                 Object val = Expression.eval(inte.getVars(), parts[1]);
                 inte.put(name, new DigitVar(val.toString()));
             } catch (ScriptException e) {
+                System.err.println("Variable evaluation failed. (" + name + ")");
                 e.printStackTrace();
             }
         }

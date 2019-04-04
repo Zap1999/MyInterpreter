@@ -1,17 +1,22 @@
-1 createObject Andrew [
+1 var x=1
+2 createObject Andrew [
     field age = 19
     field height = 190
     field lol = "lol"
+    field year = x
 
     sayHello <<
     1 print "Hello, I'm Andrew."
     >>
 
     sayGoodbye <<
-    1 print "Goodbye, I was Andrew."
+    1 print x
+    2 while x<10 do {
+        print x
+        var x=x+1
+    }
     >>
 
 ]
-2 use Andrew.sayGoodbye
-3 var x=Andrew.age
-4 print x
+3 use Andrew.sayGoodbye
+4 print Andrew.year

@@ -2,19 +2,16 @@ package Operators;
 
 import VarTypes.VarType;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Interpretater {
 
     private TreeMap<Integer, Operator> code =
             new TreeMap<Integer, Operator>();
-    private Map<String, VarType> vars =
+    private HashMap<String, VarType> vars =
             new HashMap<String, VarType>();
     private Integer curLine;
-    private Map<String, ObjectContainer> objects =
+    private HashMap<String, ObjectContainer> objects =
             new HashMap<>();
 
     public void next() {
@@ -38,16 +35,19 @@ public class Interpretater {
 
     public void parse(ArrayList<String> lines) {
         try {
-            String line = lines.get(0);
+            String line = lines.get(0).trim();
             String parts[] = line.split(" ");
             int lineNumber = Integer.parseInt(parts[0]);
             String opName = parts[1];
-            Operator operator;
-            if(opName == "while") {
+            Operator operator = null;
+            if(opName.length() == 5) {
                 operator = new OpWhile(lines);
             }
-            else {
+            else if (opName.length() == 12) {
                 operator = new OpCreateObject(lines);
+            }
+            else {
+                System.err.println("Wrong multiline syntax");
             }
             code.put(lineNumber, operator);
         } catch (RuntimeException e) {
@@ -85,7 +85,7 @@ public class Interpretater {
 
     }
 
-    public Map<String, VarType> getVars() {
+    public HashMap<String, VarType> getVars() {
         return vars;
     }
 
@@ -97,6 +97,16 @@ public class Interpretater {
 
     public ObjectContainer getObj(String name) {
         return objects.get(name);
+    }
+
+    public void setVars(HashMap<String, VarType> vars) {
+        Iterator it = vars.entrySet().iterator();
+        while(it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            if(!(((String)pair.getKey()).contains("\\."))) {
+                this.vars.put((String) pair.getKey(),(VarType) pair.getValue());
+            }
+        }
     }
 
 }

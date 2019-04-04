@@ -61,6 +61,7 @@ public class OpWhile extends Operator {
                 System.err.println("Error: Wrong while syntax.");
             } else {
                 String cond = matcher.group(1);
+                cond = cond.trim();
                 String makingCond[] = cond.split(" ");
                 cond = makingCond[2];
                 extendedCode.remove(0);

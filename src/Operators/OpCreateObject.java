@@ -14,13 +14,13 @@ public class OpCreateObject extends Operator{
     @Override
     public void exec(Interpretater inte) {
 
-        Pattern pattern = Pattern.compile("createObject (.*)");
+        Pattern pattern = Pattern.compile("(.*) createObject (.*)");
         Matcher matcher = pattern.matcher(extendedCode.get(0));
 
         if (!matcher.find()) {
             System.err.println("Error: Wrong object syntax.");
         } else {
-            String objName = matcher.group(1);
+            String objName = matcher.group(2);
             objName = objName.split(" ")[0];
             objName = objName.trim();
             extendedCode.remove(0);
