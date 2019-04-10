@@ -15,8 +15,8 @@ public class Interpretater {
     private Integer curLine;
     private HashMap<String, ObjectContainer> objects =
             new HashMap<>();
-
     private WebDriver driver;
+
 
     public Interpretater() {
         System.setProperty("webdriver.chrome.driver", "D:\\PE\\Java\\parser2\\chromedriver.exe");
