@@ -1,0 +1,5 @@
+1 loadLink "http://localhost/ver1/add-film.php"
+2 enterInput "input1" "avashchenock@gmail.com"
+3 enterInput "input2" "Iron"
+4 enterInput "input3" "Man"
+5 click "verify"
