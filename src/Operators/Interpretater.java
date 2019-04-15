@@ -10,8 +10,13 @@ public class Interpretater {
 
     private TreeMap<Integer, Operator> code =
             new TreeMap<Integer, Operator>();
+<<<<<<< HEAD
     private HashMap<String, VarType> vars =
             new HashMap<String, VarType>();
+=======
+    private Map<String, Object> vars =
+            new HashMap<String, Object>();
+>>>>>>> master
     private Integer curLine;
     private HashMap<String, ObjectContainer> objects =
             new HashMap<>();
@@ -94,6 +99,7 @@ public class Interpretater {
 
     }
 
+<<<<<<< HEAD
     public HashMap<String, VarType> getVars() {
         return vars;
     }
@@ -120,6 +126,14 @@ public class Interpretater {
 
     public WebDriver getDriver() {
         return driver;
+=======
+    public Map<String, Object> getVars() {
+        return vars;
+    }
+
+    public void put(String var, Object val) {
+        vars.put(var, val);
+>>>>>>> master
     }
 
 }

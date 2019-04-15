@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 1 var x=1
 2 createObject Andrew [
     field age = 19
@@ -20,3 +21,7 @@
 ]
 3 use Andrew.sayGoodbye
 4 print Andrew.year
+=======
+10 var x=   "LOOOOL"
+20 print x
+>>>>>>> master
